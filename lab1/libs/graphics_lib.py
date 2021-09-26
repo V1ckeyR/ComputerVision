@@ -41,6 +41,21 @@ def draw_circles(window, size):
     draw_circle(window, size, color_rgb(130, 0, 130))
 
 
+def task1():
+    """необхідно розробити блок-схему алгоритму та програму,
+     що реалізує побудову графічних фігур: 5 кілець і 5 квадратів.
+     Фігури розташовані в одному графічному вікні.
+     Колір фігур однаковий. Поле між кільцями різної заливки.
+     1 фігура малюється лініями, 2 вбудованими засобами.
+    """
+
+    win = GraphWin("Lab1 Task1", 500, 500)
+    draw_circles(win, 20)
+    draw_squares(win, 20)
+    win.getMouse()  # Pause to view result
+    win.close()  # Close window when done
+
+
 def draw_ring_using_lines(window, size, width, color, xc, yc):
     for a in ANGELS_FOR_CIRCLE:
         x1 = xc + size * math.cos(a)
@@ -66,6 +81,52 @@ def draw_ring_using_polygon(window, size, width, color, xc, yc):
     p = Polygon(points)
     p.setOutline(color)
     p.draw(window)
+
+
+def task2():
+    """
+    Фігуру побудувати двома способами:
+     1. В якості базових примітивів використати лінії;
+     2. В якості базових примітивів використати багатокутник.
+    Передбачити монохромний та кольоровий варіант із заливкою з різним кольором та різнокольоровими обмежувальними
+    лініями. Кольорову гаму обрати за одним із відомих способів комбінації кольорів.
+    """
+
+    win = GraphWin("Lab1 Task2", 1000, 1000)
+    radius = 120
+    delta = 40
+
+    blue = color_rgb(0, 186, 254)
+    violet = color_rgb(145, 35, 243)
+    red = color_rgb(255, 55, 55)
+    yellow = color_rgb(255, 242, 0)
+
+    # Colorful logo using lines
+    draw_ring_using_lines(win, radius, 10, blue, 250, 250 - radius + delta)
+    draw_ring_using_lines(win, radius, 10, violet, 250 - radius + delta, 250)
+    draw_ring_using_lines(win, radius, 10, red, 250, 250 + radius - delta)
+    draw_ring_using_lines(win, radius, 10, yellow, 250 + radius - delta, 250)
+
+    # Monochrome logo using lines
+    draw_ring_using_lines(win, radius, 10, 'black', 750, 250 - radius + delta)
+    draw_ring_using_lines(win, radius, 10, 'black', 750 - radius + delta, 250)
+    draw_ring_using_lines(win, radius, 10, 'black', 750, 250 + radius - delta)
+    draw_ring_using_lines(win, radius, 10, 'black', 750 + radius - delta, 250)
+
+    # Colorful logo using polygon
+    draw_ring_using_polygon(win, radius, 10, blue, 250, 750 - radius + delta)  # blue
+    draw_ring_using_polygon(win, radius, 10, violet, 250 - radius + delta, 750)  # violet
+    draw_ring_using_polygon(win, radius, 10, red, 250, 750 + radius - delta)  # red
+    draw_ring_using_polygon(win, radius, 10, yellow, 250 + radius - delta, 750)  # yellow
+
+    # Monochrome logo using polygon
+    draw_ring_using_polygon(win, radius, 10, 'black', 750, 750 - radius + delta)
+    draw_ring_using_polygon(win, radius, 10, 'black', 750 - radius + delta, 750)
+    draw_ring_using_polygon(win, radius, 10, 'black', 750, 750 + radius - delta)
+    draw_ring_using_polygon(win, radius, 10, 'black', 750 + radius - delta, 750)
+
+    win.getMouse()  # Pause to view result
+    win.close()  # Close window when done
 
 
 def draw_axes():
@@ -108,62 +169,6 @@ def get_coordinates(rule, xs):
     return list(zip(coo, coo[1:] + coo[:1]))[:-2]
 
 
-def task1():
-    """необхідно розробити блок-схему алгоритму та програму,
-     що реалізує побудову графічних фігур: 5 кілець і 5 квадратів.
-     Фігури розташовані в одному графічному вікні.
-     Колір фігур однаковий. Поле між кільцями різної заливки.
-     1 фігура малюється лініями, 2 вбудованими засобами.
-    """
-
-    win = GraphWin("Lab1 Task1", 500, 500)
-    draw_circles(win, 20)
-    draw_squares(win, 20)
-    win.getMouse()  # Pause to view result
-    win.close()  # Close window when done
-
-
-def task2():
-    """
-    Фігуру побудувати двома способами:
-     1. В якості базових примітивів використати лінії;
-     2. В якості базових примітивів використати багатокутник.
-    Передбачити монохромний та кольоровий варіант із заливкою з різним кольором та різнокольоровими обмежувальними
-    лініями. Кольорову гаму обрати за одним із відомих способів комбінації кольорів.
-    """
-
-    win = GraphWin("Lab1 Task2", 1000, 1000)
-    radius = 120
-    delta = 40
-
-    # Colorful logo using lines
-    draw_ring_using_lines(win, radius, 10, color_rgb(0, 186, 254), 250, 250 - radius + delta)  # blue
-    draw_ring_using_lines(win, radius, 10, color_rgb(145, 35, 243), 250 - radius + delta, 250)  # violet
-    draw_ring_using_lines(win, radius, 10, color_rgb(255, 55, 55), 250, 250 + radius - delta)  # red
-    draw_ring_using_lines(win, radius, 10, color_rgb(255, 242, 0), 250 + radius - delta, 250)  # yellow
-
-    # Monochrome logo using lines
-    draw_ring_using_lines(win, radius, 10, 'black', 750, 250 - radius + delta)
-    draw_ring_using_lines(win, radius, 10, 'black', 750 - radius + delta, 250)
-    draw_ring_using_lines(win, radius, 10, 'black', 750, 250 + radius - delta)
-    draw_ring_using_lines(win, radius, 10, 'black', 750 + radius - delta, 250)
-
-    # Colorful logo using polygon
-    draw_ring_using_polygon(win, radius, 10, color_rgb(0, 186, 254), 250, 750 - radius + delta)  # blue
-    draw_ring_using_polygon(win, radius, 10, color_rgb(145, 35, 243), 250 - radius + delta, 750)  # violet
-    draw_ring_using_polygon(win, radius, 10, color_rgb(255, 55, 55), 250, 750 + radius - delta)  # red
-    draw_ring_using_polygon(win, radius, 10, color_rgb(255, 242, 0), 250 + radius - delta, 750)  # yellow
-
-    # Monochrome logo using polygon
-    draw_ring_using_polygon(win, radius, 10, 'black', 750, 750 - radius + delta)
-    draw_ring_using_polygon(win, radius, 10, 'black', 750 - radius + delta, 750)
-    draw_ring_using_polygon(win, radius, 10, 'black', 750, 750 + radius - delta)
-    draw_ring_using_polygon(win, radius, 10, 'black', 750 + radius - delta, 750)
-
-    win.getMouse()  # Pause to view result
-    win.close()  # Close window when done
-
-
 def task3():
     """
     скрипт, що реалізує побудову та відображення трьох окремих графіків епюрів тестових сигналів та четвертий графік з
@@ -179,7 +184,7 @@ def task3():
 
     def third(x): return a * 0.01 * math.asin(x)
 
-    def draw_line(window, coordinates, color):
+    def draw_graphic(window, coordinates, color):
         for i in coordinates:
             line = Line(i[0], i[1])
             line.setOutline(color)
@@ -189,7 +194,7 @@ def task3():
         win = draw_axes()
         xs = get_xs(win)
         coo = get_coordinates(rule, xs)
-        draw_line(win, coo, color)
+        draw_graphic(win, coo, color)
         return win, coo
 
     win1, coo1 = draw_signal(first, 'red')
@@ -197,9 +202,9 @@ def task3():
     win3, coo3 = draw_signal(third, 'cyan')
 
     win4 = draw_axes()
-    draw_line(win4, coo1, 'red')
-    draw_line(win4, coo2, 'green')
-    draw_line(win4, coo3, 'cyan')
+    draw_graphic(win4, coo1, 'red')
+    draw_graphic(win4, coo2, 'green')
+    draw_graphic(win4, coo3, 'cyan')
 
     win4.getMouse()  # Pause to view result
     win4.close()  # Close window when done
