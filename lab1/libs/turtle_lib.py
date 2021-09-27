@@ -82,7 +82,7 @@ def task1():
     move_point(point, x=s/2+4*d+a, y=s/2+4*d)
     draw_squares(point, s, d)
 
-    turtle.done()
+    turtle.exitonclick()
 
 
 def draw_figure_using_lines(p, r, *, xc, yc, width, delta, is_colorful):
@@ -173,7 +173,7 @@ def task2():
     draw_figure_using_polygons(point, xc=between, yc=-1 * between, delta=d/2, is_colorful=False)
     draw_figure_using_polygons(point, xc=between, yc=between, delta=d/2, is_colorful=True)
 
-    turtle.done()
+    turtle.exitonclick()
 
 
 def draw_axes(p, x, y, size):
@@ -266,4 +266,4 @@ def task3():
                                    xc=delta, yc=-delta-size/2,
                                    dx=delta+delta_for_axes, dy=-delta+delta)
 
-    turtle.done()
+    turtle.exitonclick()
