@@ -2,3 +2,5 @@
 venv
 KPI_Computer_Vision
 lab1/libs/graphics.py
+*.zip
+*.pdf
