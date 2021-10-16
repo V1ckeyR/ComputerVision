@@ -1,3 +1,4 @@
+import math
 import random
 from time import sleep
 
@@ -55,10 +56,13 @@ def rotate(figure, a): return rotate_y(rotate_x(figure, a), a)
 
 
 def show(figure, color):
-    o = Point(figure[0, 0], figure[0, 1])
-    a = Point(figure[1, 0], figure[1, 1])
-    b = Point(figure[2, 0], figure[2, 1])
-    c = Point(figure[3, 0], figure[3, 1])
+    a = Point(figure[0, 0], figure[0, 1])
+    b = Point(figure[1, 0], figure[1, 1])
+    c = Point(figure[2, 0], figure[2, 1])
+    o = Point(figure[3, 0], figure[3, 1])
+
+    t = Polygon(c, a, b).draw(win)
+    t.setFill('white')
 
     t = Polygon(o, a, b).draw(win)
     t.setFill(color_rgb(*color[0]))
@@ -68,13 +72,11 @@ def show(figure, color):
 
     t = Polygon(o, a, c).draw(win)
     t.setFill(color_rgb(*color[2]))
-
-    Polygon(c, a, b).draw(win)
     sleep(1)
 
 
 def isometric(figure):
-    a = radians(120)
+    a = math.asin(math.tan(radians(30)))
     t1 = np.array([
         [cos(a), 0, -sin(a), 0],
         [0,      1,  0,      0],
@@ -82,6 +84,7 @@ def isometric(figure):
         [0,      0,  0,      0]
     ])
 
+    a = radians(45)
     t2 = np.array([
         [1,  0,      0,      0],
         [0,  cos(a), sin(a), 0],
@@ -89,7 +92,7 @@ def isometric(figure):
         [0,  0,      0,      0]
     ])
 
-    return figure.dot(t1).dot(t2)
+    return t2.dot(t1).dot(figure)
 
 
 if __name__ == '__main__':
